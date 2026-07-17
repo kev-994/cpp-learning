@@ -1,14 +1,3 @@
-/*
-=== Performance Report #3 ===
-Instructions: 1250
-Cache hits: 420
-Cache misses: 80
-Cache hit rate: 84%
-Branches: 200
-Branch mispredictions: 12
-Branch prediction accuracy: 94%
-*/
-
 #include <iostream>
 #include "config.h"
 #include "counters.h"
@@ -75,6 +64,11 @@ int main()
         {
             std::cout << "Exiting...\n";
             running = false;
+        }
+
+        else 
+        {
+            std::cout << "That is not a valid option, try again\n";
         }
 
     }
