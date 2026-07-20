@@ -104,7 +104,7 @@ namespace cpu
         case 6:
             [[fallthrough]];
         case 7:
-            if ((getDest() == reservedRegister) || (reservedRegister) || (getSourceTwo() == reservedRegister))  
+            if ((getDest() == reservedRegister) || getSourceOne() == reservedRegister || (getSourceTwo() == reservedRegister))  
                 return false;  
         default:
             break;
