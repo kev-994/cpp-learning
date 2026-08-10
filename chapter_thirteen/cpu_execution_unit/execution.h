@@ -37,7 +37,7 @@ struct CPU
 
 void modifyZeroFlag(CPU& cpu);
 
-void printInformation(const CPU* cpu, const Instruction& instruction);
+void printInformation(const CPU& cpu, const Instruction& instruction);
 
-void executeInstruction(CPU& cpuPtr, const Instruction& instruction);
+void executeInstruction(CPU& cpu, const Instruction& instruction);
 
