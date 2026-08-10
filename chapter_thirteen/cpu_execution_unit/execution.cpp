@@ -6,10 +6,10 @@
 
 void modifyZeroFlag(CPU& cpu) // modifies when needed
 {
-    cpu.zeroFlag = (cpu.accumulator == 0) ? 1 : 0;
+    cpu.zeroFlag = (cpu.accumulator == 0);
 }
 
-void exectuteInstruction(CPU& cpu, Instruction& instruction)
+void executeInstruction(CPU& cpu, const Instruction& instruction)
 {
     switch (instruction.operation)
     {
@@ -57,10 +57,10 @@ void exectuteInstruction(CPU& cpu, Instruction& instruction)
     }
 }
 
-constexpr std::string_view getOpName(Instruction& instruction)
+constexpr std::string_view getOpName(ALUOperation operation) // enums are tiny and cheap to copy, pass by value
 {
     using enum ALUOperation;
-    switch (instruction.operation)
+    switch (operation)
     {
     case LOAD: return "LOAD";
     case ADD:  return "ADD";
@@ -74,12 +74,20 @@ constexpr std::string_view getOpName(Instruction& instruction)
     }
 }
 
-std::ostream& operator<<(std::ostream& out, Instruction& instruction) // so the operation names can be printed
+std::ostream& operator<<(std::ostream& out, ALUOperation operation) // so the operation names can be printed
 {
-    return out << getOpName(instruction);
+    return out << getOpName(operation);
 }
 
 void printInformation(const CPU& cpu, const Instruction& instruction)
 {
     std::cout << '\n';
+    if ((instruction.operation != ALUOperation::INC) && (instruction.operation != ALUOperation::DEC))
+        std::cout << instruction.operation << " " << static_cast<int>(instruction.operand) << '\n';
+    else
+        std::cout << instruction.operation << '\n';
+              
+    std::cout << "ACC: " << static_cast<int>(cpu.accumulator) << '\n'
+              << "Z: " << cpu.zeroFlag << "\n\n";
 }
+
