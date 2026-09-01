@@ -16,13 +16,13 @@ public:
     ResourceHandle(const ResourceHandle&) = delete; // disable copy constructor
     ResourceHandle& operator=(const ResourceHandle&) = delete; // disable copy assignment
 
-    ResourceHandle(ResourceHandle&& other)
+    ResourceHandle(ResourceHandle&& other) noexcept
     {
         m_res = other.m_res;
         other.m_res = nullptr;
     }
 
-    ResourceHandle& operator=(ResourceHandle&& other)
+    ResourceHandle& operator=(ResourceHandle&& other) noexcept
     {
         if (&other == this)
             return *this;
